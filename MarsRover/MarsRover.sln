@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRover.Tests", "MarsRover.Tests\MarsRover.Tests.csproj", "{CEB2938E-07BF-4C48-B728-FECEB4D84723}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRover", "MarsRover\MarsRover.csproj", "{852CE94B-D222-4FD0-9510-6A433AECC4B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{CEB2938E-07BF-4C48-B728-FECEB4D84723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEB2938E-07BF-4C48-B728-FECEB4D84723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEB2938E-07BF-4C48-B728-FECEB4D84723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{852CE94B-D222-4FD0-9510-6A433AECC4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{852CE94B-D222-4FD0-9510-6A433AECC4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{852CE94B-D222-4FD0-9510-6A433AECC4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{852CE94B-D222-4FD0-9510-6A433AECC4B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
