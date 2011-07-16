@@ -72,6 +72,94 @@ namespace MarsRover.Tests
             "It should decrement the X coordinate".AssertThat(rover.Position.X, Is.EqualTo(0));
             "It should be facing north".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.West));
         }
+
+        [Test]
+        public void when_the_rover_turns_left_when_facing_north()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("L");
+
+            "It should be facing west".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.West));
+        }
+
+        [Test]
+        public void when_the_rover_turns_left_when_facing_east()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.East };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("L");
+
+            "It should be facing north".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.North));
+        }
+
+        [Test]
+        public void when_the_rover_turns_left_when_facing_south()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.South };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("L");
+
+            "It should be facing east".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.East));
+        }
+
+        [Test]
+        public void when_the_rover_turns_left_when_facing_west()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.West };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("L");
+
+            "It should be facing south".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.South));
+        }
+
+        [Test]
+        public void when_the_rover_turns_right_when_facing_north()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("R");
+
+            "It should be facing east".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.East));
+        }
+
+        [Test]
+        public void when_the_rover_turns_right_when_facing_east()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.East };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("R");
+
+            "It should be facing south".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.South));
+        }
+
+        [Test]
+        public void when_the_rover_turns_right_when_facing_south()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.South };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("R");
+
+            "It should be facing west".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.West));
+        }
+
+        [Test]
+        public void when_the_rover_turns_right_when_facing_west()
+        {
+            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.West };
+            var rover = new Rover(initialPosition, _plateau);
+
+            rover.ProcessInstructions("R");
+
+            "It should be facing north".AssertThat(rover.Position.Direction, Is.EqualTo(Direction.North));
+        }
     }
 
     [TestFixture]
