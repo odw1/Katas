@@ -9,16 +9,13 @@ Properties {
 
 task Default -depends RunUnitTests
 
-task RunUnitTests -depends Compile
+task RunUnitTests -depends Compile {
+	RunTests "/exclude=endtoend"
+}
 
 task EndToEndTests -depends Compile -description "End to end tests" {
 	Write-Host "Executing End To End Tests"
-	$testAssemblies = (Get-ChildItem "Build" -Recurse -Include *Tests.dll -Name)
-	
-	foreach($test_asm_name in $testAssemblies) {
-		$file_name = $build_artifacts_dir + "" + $test_asm_name
-		Exec {nunit-console.exe $file_name "/include=endtoend"}
-	}
+	RunTests "/include=endtoend"
 }
 
 task Compile -depends Clean -description "Builds the mars rover solution" {	
@@ -38,4 +35,13 @@ task Clean -description "Removes previous builds" {
 	
 	Write-Host "Cleaning MarsRover.sln"
 	Exec { msbuild "MarsRover.sln" /t:Clean /p:Configuration=Release /v:quiet } 
+}
+
+function RunTests($includeExcludeArg) {
+	$testAssemblies = (Get-ChildItem "Build" -Recurse -Include *Tests.dll -Name)
+	
+	foreach($test_asm_name in $testAssemblies) {
+		$file_name = $build_artifacts_dir + "" + $test_asm_name
+		Exec {nunit-console.exe $file_name $includeExcludeArg}
+	}
 }
