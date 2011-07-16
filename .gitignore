@@ -1,6 +1,7 @@
 bin/
 obj/
 Drops/
+Build/
 _ReSharper.*
 *.csproj.user
 *.resharper.user
@@ -10,3 +11,4 @@ _ReSharper.*
 *.user
 ~$*
 *.dotCover
+TestResult.xml
