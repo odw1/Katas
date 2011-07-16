@@ -1,0 +1,12 @@
+bin/
+obj/
+Drops/
+_ReSharper.*
+*.csproj.user
+*.resharper.user
+*.resharper
+*.suo
+*.cache
+*.user
+~$*
+*.dotCover
