@@ -1,50 +1,27 @@
+using System;
+
 namespace MarsRover
 {
     public class Rover
     {
+        private readonly IInstructionHandler _instructionHandler;
         public Plateau Plateau { get; private set; }
         public Position Position { get; private set; }
 
-        public Rover(Position initialPosition, Plateau plateau)
+        public Rover(Position initialPosition, Plateau plateau, IInstructionHandler instructionHandler)
         {
+            _instructionHandler = instructionHandler;
             Position = initialPosition;
             Plateau = plateau;
         }
 
         public void ProcessInstructions(string instructions)
         {
-            if (instructions == "M")
+            for (int i = 0; i < instructions.Length; i++ )
             {
-                if (Position.Direction == Direction.North)
-                    Position.Y++;
-                else if (Position.Direction == Direction.East)
-                    Position.X++;
-                else if (Position.Direction == Direction.South)
-                    Position.Y--;
-                else if (Position.Direction == Direction.West)
-                    Position.X--;
-            }
-            else if (instructions == "L")
-            {
-                if (Position.Direction == Direction.North)
-                    Position.Direction = Direction.West;
-                else if (Position.Direction == Direction.East)
-                    Position.Direction = Direction.North;
-                else if (Position.Direction == Direction.South)
-                    Position.Direction = Direction.East;
-                else if (Position.Direction == Direction.West)
-                    Position.Direction = Direction.South;
-            }
-            else if (instructions == "R")
-            {
-                if (Position.Direction == Direction.North)
-                    Position.Direction = Direction.East;
-                else if (Position.Direction == Direction.East)
-                    Position.Direction = Direction.South;
-                else if (Position.Direction == Direction.South)
-                    Position.Direction = Direction.West;
-                else if (Position.Direction == Direction.West)
-                    Position.Direction = Direction.North;
+                var instruction = instructions[i].ToString();
+                var updatedPosition = _instructionHandler.Handle(instruction, Position);
+                Position = updatedPosition;
             }
         }
     }
