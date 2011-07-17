@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectionTests.cs" />
     <Compile Include="InstructionHandlerTests.cs" />
     <Compile Include="NUnitExtentsions.cs" />
     <Compile Include="PlateauTests.cs" />

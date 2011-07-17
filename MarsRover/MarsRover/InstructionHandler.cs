@@ -28,25 +28,11 @@ namespace MarsRover
             }
             else if (instruction == "L")
             {
-                if (direction == Direction.North)
-                    direction = Direction.West;
-                else if (direction == Direction.East)
-                    direction = Direction.North;
-                else if (direction == Direction.South)
-                    direction = Direction.East;
-                else if (direction == Direction.West)
-                    direction = Direction.South;
+                direction = direction.TurnLeft();
             }
             else if (instruction == "R")
             {
-                if (direction == Direction.North)
-                    direction = Direction.East;
-                else if (direction == Direction.East)
-                    direction = Direction.South;
-                else if (direction == Direction.South)
-                    direction = Direction.West;
-                else if (direction == Direction.West)
-                    direction = Direction.North;
+                direction = direction.TurnRight();
             }
             else
             {
