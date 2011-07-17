@@ -4,7 +4,7 @@ describe('Mars Rover', function () {
 		var plateau;
 		
 		beforeEach(function () {
-			plateau = MarsRover.getPlateau(5, 10);
+			plateau = MarsRover.Controller.getPlateau(5, 10);
 		});
 	
 		it('should return a plateau with the correct top x coordinate', function (){
@@ -28,7 +28,7 @@ describe('Mars Rover', function () {
 		var rover;
 		
 		beforeEach(function () {
-			rover = MarsRover.getRover(1, 2, 'N');
+			rover = MarsRover.Controller.getRover(1, 2, MarsRover.Directions.north());
 		});
 		
 		it('should return a rover with the correct starting x coordinate', function () {
@@ -40,7 +40,7 @@ describe('Mars Rover', function () {
 		});
 		
 		it('should return a rover with the correct starting direction', function () {
-			expect(rover.position.direction).toEqual('N');
+			expect(rover.position.direction.name).toEqual('north');
 		});
 	
 	});
