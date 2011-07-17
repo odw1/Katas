@@ -1,5 +1,3 @@
-using System;
-
 namespace MarsRover
 {
     public class Plateau

@@ -5,14 +5,14 @@ namespace MarsRover
     public class Rover
     {
         private readonly IInstructionHandler _instructionHandler;
-        public Plateau Plateau { get; private set; }
+        private readonly Plateau _plateau;
         public Position Position { get; private set; }
 
         public Rover(Position initialPosition, Plateau plateau, IInstructionHandler instructionHandler)
         {
-            _instructionHandler = instructionHandler;
             Position = initialPosition;
-            Plateau = plateau;
+            _plateau = plateau;
+            _instructionHandler = instructionHandler;
         }
 
         public void ProcessInstructions(string instructions)
@@ -22,7 +22,7 @@ namespace MarsRover
                 var instruction = instructions[i].ToString();
                 var updatedPosition = _instructionHandler.Handle(instruction, Position);
 
-                var isUpdatdPositionValid = Plateau.IsPositionOnPlateau(updatedPosition);
+                var isUpdatdPositionValid = _plateau.IsPositionOnPlateau(updatedPosition);
 
                 if (!isUpdatdPositionValid)
                     throw new InvalidOperationException("The rover cannot move outside of the plateau");

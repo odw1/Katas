@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -26,7 +23,6 @@ namespace MarsRover.Tests
             var initialPosition = new Position(1, 2, Direction.North);
             var rover = new Rover(initialPosition, _plateau, _instructionHandler);
 
-            "It should set the plateau".AssertThat(rover.Plateau, Is.EqualTo(_plateau));
             "It should set the position".AssertThat(rover.Position, Is.EqualTo(initialPosition));
         }
 
