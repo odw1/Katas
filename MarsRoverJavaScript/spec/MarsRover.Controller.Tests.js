@@ -1,4 +1,4 @@
-describe('Mars Rover', function () {
+describe('Mars Rover Controller', function () {
 	
 	describe('when getting the plateau', function () {
 		var plateau;
