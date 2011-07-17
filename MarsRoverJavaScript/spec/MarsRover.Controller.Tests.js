@@ -4,7 +4,9 @@ describe('Mars Rover Controller', function () {
 		var plateau;
 		
 		beforeEach(function () {
-			plateau = MarsRover.Controller.getPlateau(5, 10);
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
 		});
 	
 		it('should return a plateau with the correct top x coordinate', function (){
@@ -24,10 +26,70 @@ describe('Mars Rover Controller', function () {
 		});
 	});
 	
+	describe('when validating if a position is on the plateau', function () {
+		it('should validate the position', function () {
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
+			
+			plateau.isPositionOnPlateau({ x: 4, y : 8});
+		});
+	});
+	
+	describe('when validating if a position is on the plateau and the X coordinate is to high', function () {
+		it('should validate the position', function () {
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
+			
+			var f = function () { plateau.isPositionOnPlateau({ x: 7, y : 8}) };
+			
+			expect(f).toThrow('Position is not on the plateau');
+		});
+	});
+	
+	describe('when validating if a position is on the plateau and the X coordinate is to low', function () {
+		it('should validate the position', function () {
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
+			
+			var f = function () { plateau.isPositionOnPlateau({ x: -7, y : 8}) };
+			
+			expect(f).toThrow('Position is not on the plateau');
+		});
+	});
+	
+	describe('when validating if a position is on the plateau and the Y coordinate is to high', function () {
+		it('should validate the position', function () {
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
+			
+			var f = function () { plateau.isPositionOnPlateau({ x: 4, y : 11}) };
+			
+			expect(f).toThrow('Position is not on the plateau');
+		});
+	});
+	
+	describe('when validating if a position is on the plateau and the Y coordinate is to low', function () {
+		it('should validate the position', function () {
+			MarsRover.Controller.topXCoordinate = 5;
+			MarsRover.Controller.topYCoordinate = 10;
+			plateau = MarsRover.Controller.getPlateau();
+			
+			var f = function () { plateau.isPositionOnPlateau({ x: 4, y : -1}) };
+			
+			expect(f).toThrow('Position is not on the plateau');
+		});
+	});
+	
 	describe('when getting a rover', function () {
 		var rover;
+		var plateau = 'plateau';
 		
 		beforeEach(function () {
+			spyOn(MarsRover.Controller, 'getPlateau').andReturn(plateau);
 			rover = MarsRover.Controller.getRover(1, 2, MarsRover.Directions.north());
 		});
 		
@@ -42,6 +104,9 @@ describe('Mars Rover Controller', function () {
 		it('should return a rover with the correct starting direction', function () {
 			expect(rover.position.direction.name).toEqual('north');
 		});
-	
+		
+		it('should return a rover with the correct plateau', function () {
+			expect(rover.plateau).toEqual('plateau');
+		});
 	});
 });

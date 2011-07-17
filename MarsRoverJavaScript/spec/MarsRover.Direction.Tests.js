@@ -1,12 +1,19 @@
 describe('Mars Rover Direction', function () {
+
+	var position;
+	
+	beforeEach(function () {
+		position = { direction: '' };
+	});
 	
 	describe('when facing north and turning left', function () {
 	
 		it('should turn to face west', function () {
-			var direction = MarsRover.Directions.north();
-			var newDirection = direction.turnLeft();
 			
-			expect(newDirection.name).toEqual('west');
+			var direction = MarsRover.Directions.north();
+			direction.turnLeft(position);
+			
+			expect(position.direction.name).toEqual('west');
 		});
 		
 	});
@@ -15,9 +22,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face east', function () {
 			var direction = MarsRover.Directions.north();
-			var newDirection = direction.turnRight();
+			direction.turnRight(position);
 			
-			expect(newDirection.name).toEqual('east');
+			expect(position.direction.name).toEqual('east');
 		});
 		
 	});
@@ -26,9 +33,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face north', function () {
 			var direction = MarsRover.Directions.east();
-			var newDirection = direction.turnLeft();
+			direction.turnLeft(position);
 			
-			expect(newDirection.name).toEqual('north');
+			expect(position.direction.name).toEqual('north');
 		});
 		
 	});
@@ -37,9 +44,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face south', function () {
 			var direction = MarsRover.Directions.east();
-			var newDirection = direction.turnRight();
+			direction.turnRight(position);
 			
-			expect(newDirection.name).toEqual('south');
+			expect(position.direction.name).toEqual('south');
 		});
 		
 	});
@@ -48,9 +55,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face east', function () {
 			var direction = MarsRover.Directions.south();
-			var newDirection = direction.turnLeft();
+			direction.turnLeft(position);
 			
-			expect(newDirection.name).toEqual('east');
+			expect(position.direction.name).toEqual('east');
 		});
 		
 	});
@@ -59,9 +66,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face west', function () {
 			var direction = MarsRover.Directions.south();
-			var newDirection = direction.turnRight();
+			direction.turnRight(position);
 			
-			expect(newDirection.name).toEqual('west');
+			expect(position.direction.name).toEqual('west');
 		});
 		
 	});
@@ -70,9 +77,9 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face south', function () {
 			var direction = MarsRover.Directions.west();
-			var newDirection = direction.turnLeft();
+			direction.turnLeft(position);
 			
-			expect(newDirection.name).toEqual('south');
+			expect(position.direction.name).toEqual('south');
 		});
 		
 	});
@@ -81,11 +88,58 @@ describe('Mars Rover Direction', function () {
 	
 		it('should turn to face north', function () {
 			var direction = MarsRover.Directions.west();
-			var newDirection = direction.turnRight();
+			direction.turnRight(position);
 			
-			expect(newDirection.name).toEqual('north');
+			expect(position.direction.name).toEqual('north');
 		});
 		
 	});
 	
+	describe('when moving forwards when facing north', function () {
+	
+		it('should increment the y coordinate', function () {
+			var position = { x: 1, y: 2 };
+			var direction = MarsRover.Directions.north()
+			direction.moveForwards(position);
+			
+			expect(position.x).toEqual(1);
+			expect(position.y).toEqual(3);
+		});
+	});
+	
+	describe('when moving forwards when facing east', function () {
+	
+		it('should increment the x coordinate', function () {
+			var position = { x: 1, y: 2 };
+			var direction = MarsRover.Directions.east()
+			direction.moveForwards(position);
+			
+			expect(position.x).toEqual(2);
+			expect(position.y).toEqual(2);
+		});
+	});
+	
+	describe('when moving forwards when facing south', function () {
+	
+		it('should decrement the y coordinate', function () {
+			var position = { x: 1, y: 2 };
+			var direction = MarsRover.Directions.south()
+			direction.moveForwards(position);
+			
+			expect(position.x).toEqual(1);
+			expect(position.y).toEqual(1);
+		});
+	});
+	
+	describe('when moving forwards when facing west', function () {
+	
+		it('should decrement the x coordinate', function () {
+			var position = { x: 1, y: 2 };
+			var direction = MarsRover.Directions.west()
+			direction.moveForwards(position);
+			
+			expect(position.x).toEqual(0);
+			expect(position.y).toEqual(2);
+		});
+	});
 });

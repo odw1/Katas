@@ -30,14 +30,43 @@ describe('Rover', function () {
 	});
 	
 	describe('when executing an invalid instruction', function () {
+	
 		it('should throw an exception', function () {
-			rover = new MarsRover.Rover(1, 2, MarsRover.Directions.north());
+			var rover = new MarsRover.Rover(1, 2, MarsRover.Directions.north());
 			
 			expect(rover.executeInstruction).toThrow('Invalid instruction specified');
 		});
 	});
 	
-	describe('when executing an instruction', function () {
+	describe('when executing an instruction to turn left', function () {
 		
+		it('should update the rovers direction', function () {
+			var rover = new MarsRover.Rover(1, 2, MarsRover.Directions.north());
+			rover.executeInstruction('L');
+			
+			expect(rover.position.direction.name).toEqual('west');
+		});
 	});
+	
+	describe('when executing an instruction to turn right', function () {
+	
+		it('should update the rovers direction', function () {
+			var rover = new MarsRover.Rover(1, 2, MarsRover.Directions.north());
+			rover.executeInstruction('R');
+			
+			expect(rover.position.direction.name).toEqual('east');
+		});
+	});
+	
+	describe('when executing an instruction to move forwards', function () {
+	
+		it('should update the rovers direction', function () {
+			var rover = new MarsRover.Rover(1, 2, MarsRover.Directions.north());
+			rover.executeInstruction('M');
+			
+			expect(rover.position.x).toEqual(1);
+			expect(rover.position.y).toEqual(3);
+		});
+	});
+
 });

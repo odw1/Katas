@@ -1,9 +1,10 @@
-MarsRover.Rover = function (x, y, direction) {
+MarsRover.Rover = function (x, y, direction, plateau) {
 	this.position = { 
 		x: x, 
 		y: y, 
-		direction: direction 
+		direction: direction
 	};
+	this.plateau = plateau;
 };
 
 MarsRover.Rover.prototype.processInstructions = function (instructions) {
@@ -15,10 +16,20 @@ MarsRover.Rover.prototype.processInstructions = function (instructions) {
 };
 
 MarsRover.Rover.prototype.executeInstruction = function (instruction) {
-	if (instruction !== 'L' || instruction !== 'M' || instruction != 'R') {
+	if (instruction !== 'L' && instruction !== 'M' && instruction != 'R') {
 		throw {
 			name: 'ArgumentError',
 			message: 'Invalid instruction specified'
 		};
+	}
+	
+	if (instruction === 'L') {
+		this.position.direction.turnLeft(this.position);
+	}
+	else if (instruction === 'R') {
+		this.position.direction.turnRight(this.position);
+	}
+	else if (instruction === 'M') {
+		this.position.direction.moveForwards(this.position);
 	}
 };
