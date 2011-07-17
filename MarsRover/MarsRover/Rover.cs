@@ -21,6 +21,12 @@ namespace MarsRover
             {
                 var instruction = instructions[i].ToString();
                 var updatedPosition = _instructionHandler.Handle(instruction, Position);
+
+                var isUpdatdPositionValid = Plateau.IsPositionOnPlateau(updatedPosition);
+
+                if (!isUpdatdPositionValid)
+                    throw new InvalidOperationException("The rover cannot move outside of the plateau");
+
                 Position = updatedPosition;
             }
         }

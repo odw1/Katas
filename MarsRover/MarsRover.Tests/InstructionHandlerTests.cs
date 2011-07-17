@@ -20,7 +20,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_moves_when_facing_north()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var initialPosition = new Position(1, 2, Direction.North);
 
             var updatedPosition = _instructionHandler.Handle("M", initialPosition);
 
@@ -32,7 +32,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_moves_when_facing_east()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.East };
+            var initialPosition = new Position(1, 2, Direction.East);
 
             var updatedPosition = _instructionHandler.Handle("M", initialPosition);
 
@@ -44,7 +44,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_moves_when_facing_south()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.South };
+            var initialPosition = new Position(1, 2, Direction.South);
 
             var updatedPosition = _instructionHandler.Handle("M", initialPosition);
 
@@ -56,7 +56,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_moves_when_facing_west()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.West };
+            var initialPosition = new Position(1, 2, Direction.West);
 
             var updatedPosition = _instructionHandler.Handle("M", initialPosition);
 
@@ -68,7 +68,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_left_when_facing_north()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var initialPosition = new Position(1, 2, Direction.North);
 
             var updatedPosition = _instructionHandler.Handle("L", initialPosition);
 
@@ -78,7 +78,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_left_when_facing_east()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.East };
+            var initialPosition = new Position(1, 2, Direction.East);
 
             var updatedPosition = _instructionHandler.Handle("L", initialPosition);
 
@@ -88,7 +88,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_left_when_facing_south()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.South };
+            var initialPosition = new Position(1, 2, Direction.South);
 
             var updatedPosition = _instructionHandler.Handle("L", initialPosition);
 
@@ -98,7 +98,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_left_when_facing_west()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.West };
+            var initialPosition = new Position(1, 2, Direction.West);
 
             var updatedPosition = _instructionHandler.Handle("L", initialPosition);
 
@@ -108,7 +108,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_right_when_facing_north()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var initialPosition = new Position(1, 2, Direction.North);
 
             var updatedPosition = _instructionHandler.Handle("R", initialPosition);
 
@@ -118,7 +118,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_right_when_facing_east()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.East };
+            var initialPosition = new Position(1, 2, Direction.East);
 
             var updatedPosition = _instructionHandler.Handle("R", initialPosition);
 
@@ -128,7 +128,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_right_when_facing_south()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.South };
+            var initialPosition = new Position(1, 2, Direction.South);
 
             var updatedPosition = _instructionHandler.Handle("R", initialPosition);
 
@@ -138,11 +138,17 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_turns_right_when_facing_west()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.West };
+            var initialPosition = new Position(1, 2, Direction.West);
 
             var updatedPosition = _instructionHandler.Handle("R", initialPosition);
 
             "It should be facing north".AssertThat(updatedPosition.Direction, Is.EqualTo(Direction.North));
+        }
+
+        [Test]
+        public void when_an_invalid_instruction_specified()
+        {
+            "It should throw an invalid argument exception".AssertThrows<ArgumentException>(() => _instructionHandler.Handle("E", new Position(1, 2, Direction.West)));
         }
     }
 }

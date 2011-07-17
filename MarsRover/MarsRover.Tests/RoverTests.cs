@@ -23,7 +23,7 @@ namespace MarsRover.Tests
         [Test]
         public void when_the_rover_is_created()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var initialPosition = new Position(1, 2, Direction.North);
             var rover = new Rover(initialPosition, _plateau, _instructionHandler);
 
             "It should set the plateau".AssertThat(rover.Plateau, Is.EqualTo(_plateau));
@@ -33,8 +33,8 @@ namespace MarsRover.Tests
         [Test]
         public void when_processing_instructions()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
-            var updatedPosition = new Position { X = 10, Y = 20, Direction = Direction.South };
+            var initialPosition = new Position(1, 2, Direction.North);
+            var updatedPosition = new Position(4, 4, Direction.South);
 
             _instructionHandler.Stub(x => x.Handle("L", initialPosition)).Return(updatedPosition);
 
@@ -48,8 +48,8 @@ namespace MarsRover.Tests
         [Test]
         public void when_processing_multiple_instructions()
         {
-            var initialPosition = new Position { X = 1, Y = 2, Direction = Direction.North };
-            var position = new Position { X = 1, Y = 2, Direction = Direction.North };
+            var initialPosition = new Position(1, 2, Direction.North);
+            var position = new Position(1, 2, Direction.North);
 
             _instructionHandler.Stub(x => x.Handle(null, null)).IgnoreArguments().Repeat.Times(3).Return(position);
 
@@ -60,6 +60,19 @@ namespace MarsRover.Tests
             "It should ask the handler to turn the rover left".AssertWasCalled(_instructionHandler, x => x.Handle("L", initialPosition));
             "It should ask the handler to move the rover fowards".AssertWasCalled(_instructionHandler, x => x.Handle("M", position));
             "It should ask the handler to turn the rover right".AssertWasCalled(_instructionHandler, x => x.Handle("R", position));
+        }
+
+        [Test]
+        public void when_updated_position_is_outside_the_plateau()
+        {
+            var initialPosition = new Position(1, 2, Direction.North);
+            var updatedPosition = new Position(10, 20, Direction.South);
+
+            _instructionHandler.Stub(x => x.Handle("L", initialPosition)).Return(updatedPosition);
+
+            var rover = new Rover(initialPosition, _plateau, _instructionHandler);
+
+            "It should throw an exception".AssertThrows<InvalidOperationException>(() => rover.ProcessInstructions("L"));
         }
     }
 
@@ -82,7 +95,7 @@ namespace MarsRover.Tests
         public void when_moving_the_first_rover()
         {
             var plateau = new Plateau(5, 5);
-            var initialPosition = new Position {X = 1, Y = 2, Direction = Direction.North};
+            var initialPosition = new Position(1, 2, Direction.North);
             var rover = new Rover(initialPosition, plateau, new InstructionHandler());
             rover.ProcessInstructions("LMLMLMLMM");
 
@@ -97,7 +110,7 @@ namespace MarsRover.Tests
         public void when_moving_the_second_rover()
         {
             var plateau = new Plateau(5, 5);
-            var initialPosition = new Position { X = 3, Y = 3, Direction = Direction.East };
+            var initialPosition = new Position(3, 3, Direction.East);
             var rover = new Rover(initialPosition, plateau, new InstructionHandler());
             rover.ProcessInstructions("MMRMMRMRRM");
 

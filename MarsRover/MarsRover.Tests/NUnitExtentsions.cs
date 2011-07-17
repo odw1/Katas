@@ -46,5 +46,13 @@ namespace MarsRover.Tests
 
             return value;
         }
+
+        public static string AssertThrows<T>(this string value, TestDelegate code) where T: Exception
+        {
+            Assert.Throws<T>(code);
+
+            return value;
+        }
+
     }
 }

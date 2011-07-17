@@ -1,3 +1,5 @@
+using System;
+
 namespace MarsRover
 {
     public interface IInstructionHandler
@@ -9,43 +11,49 @@ namespace MarsRover
     {
         public Position Handle(string instruction, Position currentPosition)
         {
-            var newPosition = new Position { Direction = currentPosition.Direction, X = currentPosition.X, Y = currentPosition.Y };
+            var xCoordinate = currentPosition.X;
+            var yCoordinate = currentPosition.Y;
+            var direction = currentPosition.Direction;
 
             if (instruction == "M")
             {
-                if (newPosition.Direction == Direction.North)
-                    newPosition.Y++;
-                else if (newPosition.Direction == Direction.East)
-                    newPosition.X++;
-                else if (newPosition.Direction == Direction.South)
-                    newPosition.Y--;
-                else if (newPosition.Direction == Direction.West)
-                    newPosition.X--;
+                if (direction == Direction.North)
+                    yCoordinate++;
+                else if (direction == Direction.East)
+                    xCoordinate++;
+                else if (direction == Direction.South)
+                    yCoordinate--;
+                else if (direction == Direction.West)
+                    xCoordinate--;
             }
             else if (instruction == "L")
             {
-                if (newPosition.Direction == Direction.North)
-                    newPosition.Direction = Direction.West;
-                else if (newPosition.Direction == Direction.East)
-                    newPosition.Direction = Direction.North;
-                else if (newPosition.Direction == Direction.South)
-                    newPosition.Direction = Direction.East;
-                else if (newPosition.Direction == Direction.West)
-                    newPosition.Direction = Direction.South;
+                if (direction == Direction.North)
+                    direction = Direction.West;
+                else if (direction == Direction.East)
+                    direction = Direction.North;
+                else if (direction == Direction.South)
+                    direction = Direction.East;
+                else if (direction == Direction.West)
+                    direction = Direction.South;
             }
             else if (instruction == "R")
             {
-                if (newPosition.Direction == Direction.North)
-                    newPosition.Direction = Direction.East;
-                else if (newPosition.Direction == Direction.East)
-                    newPosition.Direction = Direction.South;
-                else if (newPosition.Direction == Direction.South)
-                    newPosition.Direction = Direction.West;
-                else if (newPosition.Direction == Direction.West)
-                    newPosition.Direction = Direction.North;
+                if (direction == Direction.North)
+                    direction = Direction.East;
+                else if (direction == Direction.East)
+                    direction = Direction.South;
+                else if (direction == Direction.South)
+                    direction = Direction.West;
+                else if (direction == Direction.West)
+                    direction = Direction.North;
+            }
+            else
+            {
+                throw new ArgumentException( "Invalid instruction", "instruction");
             }
 
-            return newPosition;
+            return new Position(xCoordinate, yCoordinate, direction);
         }
     }
 }

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="InstructionHandlerTests.cs" />
     <Compile Include="NUnitExtentsions.cs" />
+    <Compile Include="PlateauTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoverTests.cs" />
   </ItemGroup>
