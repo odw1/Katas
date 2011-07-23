@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace SalesTax.Tests
 {
@@ -10,57 +10,32 @@ namespace SalesTax.Tests
     public class ShoppingBasketTests
     {
         [Test]
-        public void when_adding_an_item()
+        public void when_purchasing_the_items_in_the_shopping_basket()
         {
-            var item = new Item {Price = 12.49m};
+            var book = new Item { Category = Category.Book, Price = 12.49m, IsImported = false };
+            var cd = new Item { Category = Category.MusicCD, Price = 14.99m, IsImported = true };
+            string receiptText = "a receipt";
 
-            var shoppingBasket = new ShoppingBasket();
-            shoppingBasket.Add(1, item);
-        }
+            var taxCalculator = MockRepository.GenerateStub<ITaxCalculator>();
+            var receiptBuilder = MockRepository.GenerateStub<IReceiptBuilder>();
 
-        [Test]
-        public void when_generating_the_receipt_for_a_tax_exempt_item()
-        {
-            var item = new Item {Price = 12.49m};
+            taxCalculator.Stub(x => x.CalculateTax(book.Price, book.Category, book.IsImported)).Return(0m);
+            taxCalculator.Stub(x => x.CalculateTax(cd.Price, cd.Category, cd.IsImported)).Return(2.54m);
 
-            var shoppingBasket = new ShoppingBasket();
-            shoppingBasket.Add(1, item);
+            receiptBuilder.Stub(x => x.WithPurchasesItem(book.Category, book.IsImported, 12.49m)).Return(receiptBuilder);
+            receiptBuilder.Stub(x => x.WithPurchasesItem(cd.Category, cd.IsImported, 17.53m)).Return(receiptBuilder);
+            receiptBuilder.Stub(x => x.WithSalesTaxes(2.54m)).Return(receiptBuilder);
+            receiptBuilder.Stub(x => x.WithTotalPrice(30.02m)).Return(receiptBuilder);
+            receiptBuilder.Stub(x => x.Build()).Return(receiptText);
+
+            var shoppingBasket = new ShoppingBasket(taxCalculator, receiptBuilder);
+            shoppingBasket.AddToBasket(book);
+            shoppingBasket.AddToBasket(cd);
 
             var receipt = shoppingBasket.Purchase();
 
-            "It should have returned that one item was purchases".AssertThat(receipt.Items.Count(), Is.EqualTo(1));
+            "It should return the receipt".AssertThat(receipt, Is.EqualTo(receiptText));
 
-            var purchasedItem = receipt.Items.First();
-            "It should have applied no sales taxes to the purchased item".AssertThat(purchasedItem.Price, Is.EqualTo(12.49));
-
-            "It should have a total price of 12.49".AssertThat(receipt.Total, Is.EqualTo(12.49));
-            "It should have total sales tax of 0".AssertThat(receipt.SalesTaxes, Is.EqualTo(0));
         }
-    }
-
-    public class Item
-    {
-        public decimal Price { get; set; }
-    }
-
-    public class ShoppingBasket
-    {
-        public void Add(int numberOfItems, Item item)
-        {
-            
-        }
-
-        public Receipt Purchase()
-        {
-            return new Receipt();
-        }
-    }
-
-    public class Receipt
-    {
-        public decimal Total;
-        public decimal SalesTaxes;
-
-        public IEnumerable<Item> Items { get; set; }
     }
 }
