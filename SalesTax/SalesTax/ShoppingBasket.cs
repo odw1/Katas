@@ -27,7 +27,7 @@ namespace SalesTax
 
             foreach (var item in _itemsAddedToBasket)
             {
-                var itemSalesTaxes = _taxCalculator.CalculateTax(item.Price, item.Category, item.IsImported);
+                var itemSalesTaxes = _taxCalculator.Calculate(item.Price, item.Category, item.IsImported);
 
                 salesTaxes += itemSalesTaxes;
                 totalPrice += (item.Price + itemSalesTaxes);

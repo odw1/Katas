@@ -19,8 +19,8 @@ namespace SalesTax.Tests
             var taxCalculator = MockRepository.GenerateStub<ITaxCalculator>();
             var receiptBuilder = MockRepository.GenerateStub<IReceiptBuilder>();
 
-            taxCalculator.Stub(x => x.CalculateTax(book.Price, book.Category, book.IsImported)).Return(0m);
-            taxCalculator.Stub(x => x.CalculateTax(cd.Price, cd.Category, cd.IsImported)).Return(2.54m);
+            taxCalculator.Stub(x => x.Calculate(book.Price, book.Category, book.IsImported)).Return(0m);
+            taxCalculator.Stub(x => x.Calculate(cd.Price, cd.Category, cd.IsImported)).Return(2.54m);
 
             receiptBuilder.Stub(x => x.WithPurchasedItem(book.Description, book.IsImported, 12.49m)).Return(receiptBuilder);
             receiptBuilder.Stub(x => x.WithPurchasedItem(cd.Description, cd.IsImported, 17.53m)).Return(receiptBuilder);
