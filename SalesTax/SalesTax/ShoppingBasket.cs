@@ -28,10 +28,11 @@ namespace SalesTax
             foreach (var item in _itemsAddedToBasket)
             {
                 var itemSalesTaxes = _taxCalculator.Calculate(item.Price, item.Category, item.IsImported);
+                var totalItemPrice = item.Price + itemSalesTaxes;
 
                 salesTaxes += itemSalesTaxes;
                 totalPrice += (item.Price + itemSalesTaxes);
-                _receiptBuilder.WithPurchasedItem(item.Description, item.IsImported, itemSalesTaxes);
+                _receiptBuilder.WithPurchasedItem(item.Description, item.IsImported, totalItemPrice);
             }
 
             var receipt = _receiptBuilder

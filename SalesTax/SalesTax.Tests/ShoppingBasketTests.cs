@@ -34,6 +34,9 @@ namespace SalesTax.Tests
 
             var receipt = shoppingBasket.Purchase();
 
+            "It shoud call the builder with book".AssertWasCalled(receiptBuilder, x => x.WithPurchasedItem(book.Description, book.IsImported, 12.49m));
+            "It should call the builder with the cd".AssertWasCalled(receiptBuilder, x => x.WithPurchasedItem(cd.Description, cd.IsImported, 17.53m));
+
             "It should return the receipt".AssertThat(receipt, Is.EqualTo(receiptText));
 
         }

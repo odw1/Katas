@@ -30,16 +30,16 @@ namespace SalesTax
             {
                 if (purchasedItem.IsItemImported)
                 {
-                    stringBuilder.AppendLine(string.Format("1 imported {0}: {1}", purchasedItem.ItemDescription, purchasedItem.PurchasePrice));
+                    stringBuilder.AppendLine(string.Format("1 imported {0}: {1}", purchasedItem.ItemDescription, purchasedItem.PurchasePrice.ToString("N2")));
                 }
                 else
                 {
-                    stringBuilder.AppendLine(string.Format("1 {0}: {1}", purchasedItem.ItemDescription, purchasedItem.PurchasePrice));
+                    stringBuilder.AppendLine(string.Format("1 {0}: {1}", purchasedItem.ItemDescription, purchasedItem.PurchasePrice.ToString("N2")));
                 }
             }
 
-            stringBuilder.AppendLine("Sales Taxes: " + _salesTaxes);
-            stringBuilder.AppendLine("Total: " + _totalPrice);
+            stringBuilder.AppendLine("Sales Taxes: " + _salesTaxes.ToString("N2"));
+            stringBuilder.AppendLine("Total: " + _totalPrice.ToString("N2"));
 
             var receipt = stringBuilder.ToString();
             return receipt;
