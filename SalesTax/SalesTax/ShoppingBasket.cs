@@ -29,15 +29,17 @@ namespace SalesTax
             {
                 var itemSalesTaxes = _taxCalculator.CalculateTax(item.Price, item.Category, item.IsImported);
 
-                salesTaxes = itemSalesTaxes;
-                totalPrice = (item.Price + itemSalesTaxes);
-                _receiptBuilder.WithPurchasesItem(item.Category, item.IsImported, itemSalesTaxes);
+                salesTaxes += itemSalesTaxes;
+                totalPrice += (item.Price + itemSalesTaxes);
+                _receiptBuilder.WithPurchasedItem(item.Description, item.IsImported, itemSalesTaxes);
             }
 
-            _receiptBuilder.WithSalesTaxes(salesTaxes);
-            _receiptBuilder.WithTotalPrice(totalPrice);
+            var receipt = _receiptBuilder
+                .WithSalesTaxes(salesTaxes)
+                .WithTotalPrice(totalPrice)
+                .Build();
 
-            return _receiptBuilder.Build();
+            return receipt;
         }
     }
 }
