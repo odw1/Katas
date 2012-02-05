@@ -32,8 +32,8 @@ namespace MarsRover.Specs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Processing Instructions", "In order to move the Rover the plateau\r\nAs a controlling program\r\nI want to be to" +
-                    "ld the Rovers new position", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Processing Instructions", "In order to move the Rover on the plateau\r\nAs a controlling program\r\nI want to be" +
+                    " told the Rovers new position", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

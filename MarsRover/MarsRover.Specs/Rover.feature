@@ -1,5 +1,5 @@
 ﻿Feature: Processing Instructions
-	In order to move the Rover the plateau
+	In order to move the Rover on the plateau
 	As a controlling program
 	I want to be told the Rovers new position
 
