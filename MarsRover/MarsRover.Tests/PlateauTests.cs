@@ -24,7 +24,7 @@ namespace MarsRover.Tests
 
             var isValidPosition = plateau.IsPositionOnPlateau(position);
 
-            "It should NOT successfullt validate the position".AssertThat(isValidPosition, Is.False);
+            "It should NOT successfully validate the position".AssertThat(isValidPosition, Is.False);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace MarsRover.Tests
 
             var isValidPosition = plateau.IsPositionOnPlateau(position);
 
-            "It should NOT successfullt validate the position".AssertThat(isValidPosition, Is.False);
+            "It should NOT successfully validate the position".AssertThat(isValidPosition, Is.False);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace MarsRover.Tests
 
             var isValidPosition = plateau.IsPositionOnPlateau(position);
 
-            "It should NOT successfullt validate the position".AssertThat(isValidPosition, Is.False);
+            "It should NOT successfully validate the position".AssertThat(isValidPosition, Is.False);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace MarsRover.Tests
 
             var isValidPosition = plateau.IsPositionOnPlateau(position);
 
-            "It should NOT successfullt validate the position".AssertThat(isValidPosition, Is.False);
+            "It should NOT successfully validate the position".AssertThat(isValidPosition, Is.False);
         }
     }
 }
